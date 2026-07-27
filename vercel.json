@@ -1,9 +1,23 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "builds": [
+    {
+      "src": "app/**",
+      "use": "@vercel/static"
+    }
+  ],
   "routes": [
-    { "source": "/", "dest": "/app/index.html" },
-    { "source": "/console", "dest": "/app/app_console.html" },
-    { "source": "/(.*)", "dest": "/$1" }
+    {
+      "src": "/",
+      "dest": "/app/index.html"
+    },
+    {
+      "src": "/console",
+      "dest": "/app/app_console.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/app/$1"
+    }
   ]
 }

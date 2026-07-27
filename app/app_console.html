@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroCampus-AI | Tactical Command Center Console</title>
+    <!-- Google Fonts: Syne (Apple Headline) + Space Grotesk (Tech Metric) + Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet 3D Spatial Maps CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Three.js + Vanta Fog Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=console_theme_v18">
+</head>
+<body class="console-body">
+    
+    <!-- 3D Vanta Command-Center Background Canvas -->
+    <div id="three-canvas-container"></div>
+    <div class="console-grid-overlay"></div>
+
+    <!-- Console Layout Wrapper -->
+    <div class="console-layout">
+        
+        <!-- Left Sidebar Navigation Bar -->
+        <aside class="sidebar-nav glass-card">
+            <div class="sidebar-brand">
+                <div class="sidebar-logo">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="sidebar-title">
+                    <h2>AeroCampus<span class="highlight-emerald">-AI</span></h2>
+                    <span class="sidebar-subtitle">COMMAND CENTER v2.5</span>
+                </div>
+            </div>
+
+            <div class="nav-section-label">TACTICAL CONTROL MENU</div>
+
+            <nav class="sidebar-menu">
+                <button class="nav-item active" data-target="feature-radar">
+                    <i class="fa-solid fa-chart-radar nav-icon"></i>
+                    <span>01. Real-Time Radar</span>
+                    <span class="active-indicator"></span>
+                </button>
+
+                <button class="nav-item" data-target="feature-forecaster">
+                    <i class="fa-solid fa-chart-line nav-icon"></i>
+                    <span>02. ML Smog Forecaster</span>
+                    <span class="active-indicator"></span>
+                </button>
+
+                <button class="nav-item" data-target="feature-policy">
+                    <i class="fa-solid fa-sliders nav-icon"></i>
+                    <span>03. GRAP Policy Simulator</span>
+                    <span class="active-indicator"></span>
+                </button>
+
+                <button class="nav-item" data-target="feature-greenshield">
+                    <i class="fa-solid fa-tree nav-icon"></i>
+                    <span>04. Green Shield Planner</span>
+                    <span class="active-indicator"></span>
+                </button>
+
+                <button class="nav-item" data-target="feature-alerts">
+                    <i class="fa-solid fa-bell nav-icon"></i>
+                    <span>05. Safety SOP Alerts</span>
+                    <span class="active-indicator"></span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="index.html" class="btn-secondary back-home-btn">
+                    <i class="fa-solid fa-house"></i> Overview Page
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Console Content Viewport -->
+        <main class="console-viewport">
+            
+            <!-- Top Console Header Bar -->
+            <header class="console-topbar glass-card">
+                <div class="topbar-left">
+                    <h3 id="current-feature-title">Feature 01: Real-Time Environmental Radar</h3>
+                </div>
+                <div class="topbar-right">
+                    <div class="status-badge live-badge">
+                        <span class="live-dot pulse-emerald"></span>
+                        <span id="live-data-source">LIVE API PIPELINE</span>
+                    </div>
+                    <div class="time-display" id="current-time-display">--:--:-- IST</div>
+                    <a href="index.html" class="btn-secondary btn-sm">
+                        <i class="fa-solid fa-arrow-left"></i> Landing Page
+                    </a>
+                </div>
+            </header>
+
+            <!-- Feature Panel 01: Environmental Radar -->
+            <div class="feature-panel active" id="feature-radar">
+                <div class="section-title-group">
+                    <span class="section-badge">FEATURE 01</span>
+                    <h2>Real-Time Micro-Local Environmental Radar</h2>
+                    <p>Live meteorological parameters, particulate matter readings, and spatial wind direction alignments.</p>
+                </div>
+
+                <div class="monitor-grid">
+                    <!-- PM2.5 Radial Hologram -->
+                    <div class="glass-card gauge-card tilt-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-smog icon-cyan"></i> Outdoor PM<sub>2.5</sub> Level</h3>
+                            <span class="info-tag" id="inversion-status-tag">Calculating</span>
+                        </div>
+                        <div class="holo-gauge-wrapper">
+                            <div class="holo-ring" id="holo-ring">
+                                <div class="holo-inner">
+                                    <span class="holo-val" id="live-pm25-val">--</span>
+                                    <span class="holo-unit">&mu;g/m&sup3;</span>
+                                    <span class="holo-status" id="pm25-status-text">INITIALIZING</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gauge-sub-info">
+                            <div class="g-info-item">
+                                <span>WHO Guideline Target</span>
+                                <strong>15 &mu;g/m&sup3;</strong>
+                            </div>
+                            <div class="g-info-item">
+                                <span>CPCB Severe Risk</span>
+                                <strong>120 &mu;g/m&sup3;</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Micro-Local Weather Box with Rotating Compass Icon -->
+                    <div class="glass-card meteorology-card tilt-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-cloud-bolt icon-emerald"></i> Meteorology Sensors</h3>
+                        </div>
+                        <div class="weather-grid">
+                            <div class="weather-box">
+                                <i class="fa-solid fa-temperature-three-quarters icon-temp"></i>
+                                <div>
+                                    <span class="w-label">Temperature</span>
+                                    <span class="w-val" id="val-temp">-- &deg;C</span>
+                                </div>
+                            </div>
+                            <div class="weather-box">
+                                <i class="fa-solid fa-droplet icon-humidity"></i>
+                                <div>
+                                    <span class="w-label">Relative Humidity</span>
+                                    <span class="w-val" id="val-humidity">-- %</span>
+                                </div>
+                            </div>
+                            <div class="weather-box">
+                                <i class="fa-solid fa-wind icon-wind"></i>
+                                <div>
+                                    <span class="w-label">Wind Speed</span>
+                                    <span class="w-val" id="val-windspeed">-- m/s</span>
+                                </div>
+                            </div>
+                            <div class="weather-box">
+                                <i class="fa-solid fa-compass icon-dir" id="wind-compass-icon"></i>
+                                <div>
+                                    <span class="w-label">Wind Direction</span>
+                                    <span class="w-val" id="val-winddir">-- &deg; (SE)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spatial Alignment Vectors with Single Premium Header Map Button -->
+                    <div class="glass-card spatial-card tilt-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-route icon-purple"></i> Spatial Alignment Vectors</h3>
+                            <button class="map-view-btn-header" onclick="openSpatialMapModal('nh24')">
+                                <i class="fa-solid fa-map-location-dot"></i> Interactive Spatial Map
+                            </button>
+                        </div>
+                        <div class="spatial-bars">
+                            
+                            <!-- Vector 01: NH-24 Corridor -->
+                            <div class="spatial-item">
+                                <div class="spatial-label">
+                                    <span><i class="fa-solid fa-road"></i> NH-24 Highway Corridor (45&deg; NE)</span>
+                                    <span id="val-nh24-pct" class="highlight-cyan">0%</span>
+                                </div>
+                                <div class="progress-track"><div class="progress-bar bar-nh24" id="bar-nh24"></div></div>
+                            </div>
+
+                            <!-- Vector 02: Sector 63 Industrial -->
+                            <div class="spatial-item">
+                                <div class="spatial-label">
+                                    <span><i class="fa-solid fa-industry"></i> Sector 63 Industrial Zone (135&deg; SE)</span>
+                                    <span id="val-ind-pct" class="highlight-purple">0%</span>
+                                </div>
+                                <div class="progress-track"><div class="progress-bar bar-ind" id="bar-ind"></div></div>
+                            </div>
+
+                            <!-- Vector 03: Atmospheric Inversion -->
+                            <div class="spatial-item">
+                                <div class="spatial-label">
+                                    <span><i class="fa-solid fa-layer-group"></i> Inversion Risk Index</span>
+                                    <span id="val-stag-pct" class="highlight-amber">0%</span>
+                                </div>
+                                <div class="progress-track"><div class="progress-bar bar-stag" id="bar-stag"></div></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Panel 02: ML Smog Spike Forecaster -->
+            <div class="feature-panel" id="feature-forecaster">
+                <div class="section-title-group">
+                    <span class="section-badge">FEATURE 02</span>
+                    <h2>Multi-Hour Smog Spike Machine Learning Forecaster</h2>
+                    <p>Powered by Extra Trees Regressor &bull; Multi-step 4-hour prediction model (<strong>R&sup2; = 0.9439</strong>).</p>
+                </div>
+
+                <div class="glass-card chart-card tilt-card">
+                    <div class="card-header">
+                        <div class="chart-title">
+                            <i class="fa-solid fa-chart-line icon-cyan"></i> 4-Hour Forward Smog Trajectory Curve
+                        </div>
+                        <span class="model-badge"><i class="fa-solid fa-circle-check"></i> Model R&sup2; = 0.9439</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="forecastChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Panel 03: GRAP Policy Scenario Simulator with Live Traffic Map CTA -->
+            <div class="feature-panel" id="feature-policy">
+                <div class="section-title-group">
+                    <span class="section-badge">FEATURE 03</span>
+                    <h2>GRAP Policy Scenario Simulator</h2>
+                    <p>Simulate regional traffic restrictions and calculate predicted PM<sub>2.5</sub> reduction deltas.</p>
+                </div>
+
+                <div class="glass-card sim-card tilt-card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-sliders icon-emerald"></i> Interactive GRAP Policy Desk</h3>
+                        <button class="map-view-btn-header" onclick="openGrapTrafficMapModal()">
+                            <i class="fa-solid fa-car-side"></i> Live Traffic Simulation Map
+                        </button>
+                    </div>
+                    <div class="sim-controls">
+                        <div class="control-group">
+                            <label for="grap-toggle">Regional GRAP Restriction Status</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="grap-toggle">
+                                <label for="grap-toggle" class="switch-label"></label>
+                                <span id="grap-toggle-status" class="toggle-state">OFF</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="traffic-slider">Campus Bound Traffic Reduction: <span id="traffic-pct-val" class="highlight-cyan">0%</span></label>
+                            <input type="range" id="traffic-slider" min="0" max="60" value="0" step="5">
+                        </div>
+                    </div>
+                    <div class="sim-output-box">
+                        <div class="sim-metric">
+                            <span class="sm-label">Predicted Policy Reduction Delta (&Delta; PM<sub>2.5</sub>)</span>
+                            <span class="sm-val delta-val" id="policy-delta-val">0.0 &mu;g/m&sup3;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Panel 04: Green Shield Ecological Planner with Google Earth Style Satellite CTA -->
+            <div class="feature-panel" id="feature-greenshield">
+                <div class="section-title-group">
+                    <span class="section-badge">FEATURE 04</span>
+                    <h2>Green Shield Boundary & Canopy Interception Planner</h2>
+                    <p>Physical dry deposition vegetative filter equation coupled with highway wind vectors.</p>
+                </div>
+
+                <div class="glass-card sim-card tilt-card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-tree icon-cyan"></i> Perimeter Barrier Optimizer</h3>
+                        <button class="map-view-btn-header" onclick="openGreenShieldSatelliteModal()">
+                            <i class="fa-solid fa-earth-asia"></i> Live Satellite Canopy Map
+                        </button>
+                    </div>
+                    
+                    <!-- Embedded Photorealistic Trees Video -->
+                    <div class="tree-video-box">
+                        <video autoplay loop muted playsinline poster="assets/green_shield_trees.mp4">
+                            <source src="assets/green_shield_trees.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-sub-badge"><i class="fa-solid fa-leaf"></i> Photorealistic Native Tree Filtration Stream</div>
+                    </div>
+
+                    <div class="sim-controls">
+                        <div class="control-group">
+                            <label for="species-select">Native Tree Canopy Selection</label>
+                            <select id="species-select" class="custom-select">
+                                <option value="neem">Neem (Azadirachta indica) - Evergreen (k=0.08)</option>
+                                <option value="pilkan">Pilkan (Ficus infectoria) - Evergreen (k=0.07)</option>
+                                <option value="amaltas">Amaltas (Cassia fistula) - Deciduous (k=0.04)</option>
+                                <option value="mixed_native_ncr" selected>Mixed Native NCR Shield (k=0.075)</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="width-slider">Barrier Depth Width: <span id="width-val" class="highlight-emerald">20m</span></label>
+                            <input type="range" id="width-slider" min="5" max="35" value="20" step="1">
+                        </div>
+                    </div>
+                    <div class="sim-output-box">
+                        <div class="sim-metric">
+                            <span class="sm-label">Canopy Interception Efficiency (&eta;)</span>
+                            <span class="sm-val efficiency-val" id="canopy-eff-val">79.8%</span>
+                        </div>
+                        <div class="sim-metric">
+                            <span class="sm-label">Filtered Campus PM<sub>2.5</sub> Concentration</span>
+                            <span class="sm-val filtered-val" id="filtered-pm25-val">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Panel 05: Emergency Safety SOP & Live Automation Dispatcher -->
+            <div class="feature-panel" id="feature-alerts">
+                <div class="section-title-group">
+                    <span class="section-badge">FEATURE 05</span>
+                    <h2>Campus Emergency Safety SOP & Automation Dispatcher</h2>
+                    <p>Automated operational rules for sports coordinators, classroom HVAC dampers, gate security, and student mobile apps.</p>
+                </div>
+
+                <!-- Interactive Automated Sensitivity Desk -->
+                <div class="glass-card sim-card tilt-card mb-4">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-sliders icon-cyan"></i> Automated Air Quality Alert Threshold Desk</h3>
+                        <span class="model-badge" id="sop-thresh-status" style="color:var(--emerald-green);">STANDBY (SAFE)</span>
+                    </div>
+                    <div class="sim-controls">
+                        <div class="control-group">
+                            <label for="sop-thresh-slider">Trigger Sensitivity Threshold: <span id="sop-thresh-val" class="highlight-amber">150 &mu;g/m&sup3;</span></label>
+                            <input type="range" id="sop-thresh-slider" min="50" max="250" value="150" step="10">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Test Fire Dispatcher Cards -->
+                <div class="sop-rules-grid">
+                    
+                    <!-- Rule 01 -->
+                    <div class="glass-card sop-dispatch-card tilt-card">
+                        <div class="card-header">
+                            <span class="rule-badge badge-amber">RULE 01 &bull; EXERTION SAFETY</span>
+                            <button class="fire-btn fire-rose" onclick="fireSopTrigger('sports')">
+                                <i class="fa-solid fa-paper-plane"></i> Test Dispatch Rule 01
+                            </button>
+                        </div>
+                        <h3>Outdoor Sports Evacuation SOP</h3>
+                        <p>Triggered when Outdoor PM<sub>2.5</sub> exceeds threshold. Automatically dispatches emergency evacuation alerts to physical education coordinators and clears outdoor sports fields.</p>
+                        
+                        <div class="dispatch-recipients">
+                            <span>AUTOMATED TARGET RECIPIENTS:</span>
+                            <div class="recipient-tags">
+                                <span class="tag-chip"><i class="fa-solid fa-volleyball"></i> Sports Dept</span>
+                                <span class="tag-chip"><i class="fa-solid fa-mobile-screen-button"></i> Student App</span>
+                                <span class="tag-chip"><i class="fa-solid fa-user-shield"></i> Campus Warden</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 02 -->
+                    <div class="glass-card sop-dispatch-card tilt-card">
+                        <div class="card-header">
+                            <span class="rule-badge badge-cyan">RULE 02 &bull; HVAC AUTOMATION</span>
+                            <button class="fire-btn fire-cyan" onclick="fireSopTrigger('hvac')">
+                                <i class="fa-solid fa-paper-plane"></i> Test Dispatch Rule 02
+                            </button>
+                        </div>
+                        <h3>Differential Class Air Intake Damper Lock</h3>
+                        <p>Triggered during elevated smog spikes. Sends BACnet MQTT signals to lock classroom fresh air intake dampers to 100% internal recirculation mode.</p>
+
+                        <div class="dispatch-recipients">
+                            <span>AUTOMATED TARGET RECIPIENTS:</span>
+                            <div class="recipient-tags">
+                                <span class="tag-chip"><i class="fa-solid fa-fan"></i> Academic BAS</span>
+                                <span class="tag-chip"><i class="fa-solid fa-microchip"></i> BACnet MQTT</span>
+                                <span class="tag-chip"><i class="fa-solid fa-book-open-reader"></i> Library HVAC</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rule 03 -->
+                    <div class="glass-card sop-dispatch-card tilt-card">
+                        <div class="card-header">
+                            <span class="rule-badge badge-emerald">RULE 03 &bull; SECURITY ENFORCEMENT</span>
+                            <button class="fire-btn fire-emerald" onclick="fireSopTrigger('gate')">
+                                <i class="fa-solid fa-paper-plane"></i> Test Dispatch Rule 03
+                            </button>
+                        </div>
+                        <h3>Gate Vehicular Zero-Emission Lockdown</h3>
+                        <p>Triggered when GRAP Policy is active. Restricts non-essential diesel commercial trucks at Gate 1 & Gate 2; prioritizes electric shuttle access.</p>
+
+                        <div class="dispatch-recipients">
+                            <span>AUTOMATED TARGET RECIPIENTS:</span>
+                            <div class="recipient-tags">
+                                <span class="tag-chip"><i class="fa-solid fa-torii-gate"></i> Gate 1 RFID</span>
+                                <span class="tag-chip"><i class="fa-solid fa-shield-cat"></i> Gate Security</span>
+                                <span class="tag-chip"><i class="fa-solid fa-truck-ramp-box"></i> Logistics Desk</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Live Dispatch Terminal Stream Console -->
+                <div class="glass-card sop-console-card mt-4">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-terminal icon-emerald"></i> Live Automation Broadcast Log Stream</h3>
+                        <span class="live-badge-sm"><span class="live-dot pulse-emerald"></span> LISTENING FOR TRIGGERS</span>
+                    </div>
+                    <div class="sop-log-stream" id="sop-live-log-stream">
+                        <div class="sop-log-item log-initial">
+                            <span class="log-timestamp">[INITIALIZED]</span>
+                            <strong style="color:var(--emerald-green);">AeroCampus-AI SOP Automation Engine Active</strong>
+                            <p>Standing by for live PM2.5 sensor triggers or manual dispatcher test overrides.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- 3D Spatial Map Radar Modal Window -->
+    <div class="spatial-map-modal" id="spatial-map-modal">
+        <div class="glass-card modal-content">
+            
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h3><i class="fa-solid fa-map-location-dot icon-cyan"></i> Campus Spatial Alignment Radar & Map</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeSpatialMapModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                
+                <!-- Modal Sidebar Navigation Tabs -->
+                <div class="modal-sidebar">
+                    <div class="nav-section-label">SELECT POLLUTION CORRIDOR</div>
+                    
+                    <div class="modal-nav-tabs">
+                        <button class="modal-tab-btn active" id="tab-modal-nh24" onclick="switchMapCorridor('nh24')">
+                            <span><i class="fa-solid fa-road icon-cyan"></i> NH-24 Corridor (45&deg; NE)</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <button class="modal-tab-btn" id="tab-modal-industrial" onclick="switchMapCorridor('industrial')">
+                            <span><i class="fa-solid fa-industry icon-purple"></i> Sector 63 Industrial (135&deg; SE)</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <button class="modal-tab-btn" id="tab-modal-inversion" onclick="switchMapCorridor('inversion')">
+                            <span><i class="fa-solid fa-layer-group icon-amber"></i> Boundary Layer Inversion</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Live Wind Arrow Vector Indicator Box -->
+                    <div class="modal-wind-arrow-box">
+                        <i class="fa-solid fa-arrow-up modal-arrow-icon" id="modal-wind-arrow-icon"></i>
+                        <div class="modal-arrow-text">
+                            <span>LIVE ATMOSPHERIC WIND VECTOR</span>
+                            <strong id="modal-wind-arrow-val">130&deg; (SE - Southeast)</strong>
+                        </div>
+                    </div>
+
+                    <!-- Corridor Information Details -->
+                    <div class="modal-info-panel">
+                        <h4 id="modal-corridor-name"><i class="fa-solid fa-compass icon-cyan"></i> NH-24 Highway Corridor</h4>
+                        <p id="modal-corridor-desc">Heavy vehicular expressway situated 200m North of Jaypee Road. Major source of road dust and diesel particulate matter.</p>
+                        
+                        <div class="info-stat-row">
+                            <span>Target Bearing:</span>
+                            <strong id="modal-bearing-val">45&deg; (Northeast)</strong>
+                        </div>
+                        <div class="info-stat-row">
+                            <span>Distance to Campus:</span>
+                            <strong id="modal-distance-val">200 meters</strong>
+                        </div>
+                        <div class="info-stat-row">
+                            <span>Live Alignment Vector:</span>
+                            <strong id="modal-alignment-val" class="highlight-cyan">0%</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaflet Interactive Map Viewport -->
+                <div class="map-viewport-container">
+                    <div id="map-container"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Live GRAP Traffic Movement Simulation Modal Window -->
+    <div class="spatial-map-modal" id="grap-traffic-modal">
+        <div class="glass-card modal-content">
+            
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h3><i class="fa-solid fa-car-side icon-emerald"></i> GRAP Live Traffic Flow Simulation Map</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeGrapTrafficMapModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                
+                <!-- Modal Sidebar Controls & Live Metrics -->
+                <div class="modal-sidebar">
+                    <div class="nav-section-label">LIVE TRAFFIC DENSITY TELEMETRY</div>
+                    
+                    <div class="modal-info-panel">
+                        <h4><i class="fa-solid fa-traffic-light icon-cyan"></i> Active Corridor Traffic</h4>
+                        <p>Real-time vehicle movement along Jaypee Road & Vishwakarma Road access routes.</p>
+                        
+                        <div class="info-stat-row">
+                            <span>Active Vehicle Density:</span>
+                            <strong id="grap-map-vehicle-count" class="highlight-rose">22 Active Vehicles / min</strong>
+                        </div>
+                        <div class="info-stat-row">
+                            <span>Highway Congestion Status:</span>
+                            <strong id="grap-map-flow-status" style="color:var(--rose-danger);">UNRESTRICTED (HEAVY)</strong>
+                        </div>
+                    </div>
+
+                    <div class="modal-info-panel">
+                        <h4><i class="fa-solid fa-circle-info icon-emerald"></i> Live Simulation Rules</h4>
+                        <p>Adjust the <strong>Campus Bound Traffic Reduction slider</strong> or toggle <strong>GRAP Status</strong> to watch vehicle movement and exhaust density decrease live on Jaypee Road!</p>
+                    </div>
+                </div>
+
+                <!-- Leaflet Interactive Map Viewport -->
+                <div class="map-viewport-container">
+                    <div id="grap-map-container"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Green Shield Google Earth Style Esri Satellite Map Modal Window -->
+    <div class="spatial-map-modal" id="greenshield-satellite-modal">
+        <div class="glass-card modal-content">
+            
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h3><i class="fa-solid fa-earth-asia icon-emerald"></i> 360&deg; Green Shield Google Earth Satellite View</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeGreenShieldSatelliteModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                
+                <!-- Modal Sidebar Controls & Live Metrics -->
+                <div class="modal-sidebar">
+                    <div class="nav-section-label">360&deg; TREE BELT BAND TELEMETRY</div>
+                    
+                    <div class="modal-info-panel">
+                        <h4><i class="fa-solid fa-tree icon-emerald"></i> Perimeter Tree Belt Depth</h4>
+                        <p>Real-time Google Earth satellite overlay showing 360&deg; tree belt width along North, East, South, & West boundaries.</p>
+                        
+                        <div class="info-stat-row">
+                            <span>Active Belt Thickness:</span>
+                            <strong id="sat-map-width-val" class="highlight-emerald">20 Meters Tree Belt Depth</strong>
+                        </div>
+                        <div class="info-stat-row">
+                            <span>Perimeter Shield Area:</span>
+                            <strong id="sat-map-area-val" class="highlight-cyan">4,000 m&sup2; Shield</strong>
+                        </div>
+                        <div class="info-stat-row">
+                            <span>PM2.5 Interception:</span>
+                            <strong id="sat-map-eff-val" style="color:var(--emerald-green);">79.8% Interception</strong>
+                        </div>
+                    </div>
+
+                    <div class="modal-info-panel">
+                        <h4><i class="fa-solid fa-circle-info icon-cyan"></i> Live Tree Belt Simulation</h4>
+                        <p>Adjust the <strong>Barrier Depth Width slider (5m - 35m)</strong> to watch the green tree belt band grow <strong>thicker or thinner along the boundary edge</strong> while keeping inner campus buildings clear!</p>
+                    </div>
+                </div>
+
+                <!-- Leaflet Interactive Esri Satellite Viewport -->
+                <div class="map-viewport-container">
+                    <div id="greenshield-sat-map-container"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts with Console Theme Cache Buster -->
+    <script src="app.js?v=console_theme_v18"></script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroCampus-AI | Technical Project Portfolio & Architecture Showcase</title>
+    <!-- Google Fonts: Syne (Apple Headline) + Space Grotesk (Tech Metric) + Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet 3D Spatial Maps CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Three.js + Vanta Fog Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css?v=home_3d_tilt_v19">
+</head>
+<body>
+    
+    <!-- 3D Vanta Atmospheric Canvas -->
+    <div id="three-canvas-container"></div>
+    <div class="precision-grid-overlay"></div>
+
+    <!-- Main Container -->
+    <div class="app-wrapper">
+        
+        <!-- Header with Top Launch App Console CTA Button -->
+        <header class="app-header glass-card tilt-card reveal-3d">
+            <div class="brand-group">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>AERO<span class="highlight-cyan">CAMPUS</span><span class="highlight-emerald">-AI</span></h1>
+                    <p class="subtitle">JIIT NOIDA SECTOR 62 &bull; TECHNICAL SHOWCASE & AUDIT PORTFOLIO</p>
+                </div>
+            </div>
+            <div class="header-status-group">
+                <div class="status-badge live-badge">
+                    <span class="live-dot pulse-emerald"></span>
+                    <span id="live-data-source">LIVE API PIPELINE</span>
+                </div>
+                <a href="app_console.html" class="btn-primary launch-console-btn">
+                    <i class="fa-solid fa-gauge-high"></i> Launch App Console &rarr;
+                </a>
+            </div>
+        </header>
+
+        <!-- Hero Section & Executive Brief -->
+        <section class="hero-section reveal-3d">
+            <div class="hero-content">
+                <div class="hero-pill">
+                    <i class="fa-solid fa-shield-halved"></i> 1M1B INTERNSHIP PROJECT &bull; COMPREHENSIVE AUDIT SHOWCASE
+                </div>
+                <h1 class="hero-title">Predict. Simulate. <span class="gradient-text">Mitigate.</span></h1>
+                <p class="hero-subtitle">
+                    An end-to-end AI environmental intelligence system for high-density campus micro-climates. Combines real-time meteorology API pipelines, Extra Trees regression modeling (R&sup2; = 94.4%), physical dry deposition canopy physics, and automated safety SOP dispatches.
+                </p>
+
+                <!-- Key Project Highlight Chips -->
+                <div class="hero-highlight-chips">
+                    <div class="chip-item tilt-card">
+                        <span class="chip-label">ML Validation Score</span>
+                        <span class="chip-val highlight-cyan">R&sup2; = 0.9439 (94.4%)</span>
+                    </div>
+                    <div class="chip-item tilt-card">
+                        <span class="chip-label">Forecasting MAE</span>
+                        <span class="chip-val highlight-emerald">8.65 &mu;g/m&sup3;</span>
+                    </div>
+                    <div class="chip-item tilt-card">
+                        <span class="chip-label">Canopy Filtration Efficiency</span>
+                        <span class="chip-val highlight-purple">&eta; = 79.8%</span>
+                    </div>
+                    <div class="chip-item tilt-card">
+                        <span class="chip-label">Target Location</span>
+                        <span class="chip-val highlight-amber">JIIT Noida Sec 62</span>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="app_console.html" class="btn-primary btn-large">
+                        <i class="fa-solid fa-laptop-code"></i> Launch Interactive Feature Console &rarr;
+                    </a>
+                    <a href="#problem-statement" class="btn-secondary">
+                        <i class="fa-solid fa-book-open"></i> Read Technical Deep-Dive
+                    </a>
+                </div>
+            </div>
+
+            <!-- Featured Atmospheric Fluid Dynamics Simulation Video Loop -->
+            <div class="featured-video-card glass-card tilt-card reveal-3d">
+                <div class="video-container">
+                    <video autoplay loop muted playsinline poster="assets/hero_fluid_simulation.mp4">
+                        <source src="assets/hero_fluid_simulation.mp4" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                    <div class="video-overlay-badge">
+                        <i class="fa-solid fa-wind pulse-emerald"></i> Real-Time Atmospheric Fluid Dynamics Stream
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-down-hint">
+                <span>SCROLL TO READ COMPLETE PROJECT SPECIFICATIONS</span>
+                <i class="fa-solid fa-chevron-down bounce"></i>
+            </div>
+        </section>
+
+        <!-- Executive Problem Statement & Micro-Climate Physics -->
+        <section id="problem-statement" class="dashboard-section reveal-3d">
+            <div class="section-title-group">
+                <span class="section-badge">EXECUTIVE SUMMARY</span>
+                <h2>1. Problem Statement & Campus Micro-Climate Context</h2>
+                <p>Why city-wide macro AQI monitors fail to capture micro-local inversions in high-density educational environments.</p>
+            </div>
+
+            <div class="problem-grid">
+                <div class="glass-card problem-card tilt-card">
+                    <div class="prob-icon icon-cyan"><i class="fa-solid fa-building-flag"></i></div>
+                    <h3>Target Context: JIIT Noida Sector 62</h3>
+                    <p>Located at <strong>28.6295&deg; N, 77.3715&deg; E</strong>, the campus accommodates over 4,500 students and staff in a high-density urban footprint immediately adjacent to two severe pollution emission corridors.</p>
+                </div>
+
+                <div class="glass-card problem-card tilt-card">
+                    <div class="prob-icon icon-emerald"><i class="fa-solid fa-road"></i></div>
+                    <h3>Corridor A: NH-24 Highway Corridor (45&deg; NE)</h3>
+                    <p>Heavy vehicular diesel corridor carrying over 150,000 vehicles daily, generating relentless road dust (PM₁₀) and tailpipe particulate matter (PM₂.₅) directly along Jaypee Road.</p>
+                </div>
+
+                <div class="glass-card problem-card tilt-card">
+                    <div class="prob-icon icon-purple"><i class="fa-solid fa-industry"></i></div>
+                    <h3>Corridor B: Sector 63 Industrial Zone (135&deg; SE)</h3>
+                    <p>Industrial fabrication and generator complex situated Southeast of campus across Vishwakarma Road, contributing intermittent chemical smog during stagnant hours.</p>
+                </div>
+
+                <div class="glass-card problem-card tilt-card">
+                    <div class="prob-icon icon-amber"><i class="fa-solid fa-snowflake"></i></div>
+                    <h3>Winter Thermal Inversion Stagnation</h3>
+                    <p>During NCR winter months (Nov–Feb), shallow boundary layer inversions trap pollutants below 150m altitude. Calm winds (&lt;1.5 m/s) and high humidity (&gt;80%) trigger severe micro-local smog spikes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 1 Architecture: Data Engineering & Spatial Vectors -->
+        <section class="dashboard-section reveal-3d">
+            <div class="section-title-group">
+                <span class="section-badge">PHASE 01 ARCHITECTURE</span>
+                <h2>2. Real-Time Data Pipeline & Spatial Feature Vector Engine</h2>
+                <p>Automated ingestion from Open-Meteo APIs coupled with spatial alignment vector engineering.</p>
+            </div>
+
+            <div class="arch-box glass-card tilt-card">
+                <div class="arch-grid">
+                    <div class="arch-col">
+                        <h4><i class="fa-solid fa-network-wired icon-cyan"></i> Ingestion Pipeline (`realtime_pipeline.py`)</h4>
+                        <ul class="tech-list">
+                            <li><strong>Live Ingestion:</strong> Connects to Open-Meteo Air Quality & Weather APIs for Sector 62 coordinates.</li>
+                            <li><strong>Parameters Fetched:</strong> Outdoor PM₂.₅, PM₁₀, NO₂, Temperature (2m), Humidity (2m), Wind Speed (10m), Wind Direction (10m).</li>
+                            <li><strong>Offline Fallback:</strong> Automatic failover to historical Noida dataset logs (`cleaned_air_quality_dataset.xlsx`) if offline.</li>
+                        </ul>
+                    </div>
+
+                    <div class="arch-col">
+                        <h4><i class="fa-solid fa-compass icon-emerald"></i> Spatial Vector Engineering (`feature_pipeline.py`)</h4>
+                        <div class="formula-box" style="font-family:var(--font-tech); font-size:15px; color:var(--cyan-primary); text-align:center;">
+                            Alignment Vector = Max ( 0 , Cos( Wind Angle &minus; Corridor Angle ) )
+                        </div>
+                        <ul class="tech-list" style="margin-top:12px;">
+                            <li><strong>NH-24 Corridor Alignment (45&deg; NE):</strong> Measures wind blowing directly from highway.</li>
+                            <li><strong>Industrial Corridor Alignment (135&deg; SE):</strong> Measures wind from Sector 63 factories.</li>
+                            <li><strong>Stagnation Index Formula:</strong> Combines low wind speed (&lt;1.5 m/s), high humidity (&gt;80%), and low temperature.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 2 Architecture: Machine Learning Multi-Model Benchmark -->
+        <section class="dashboard-section reveal-3d">
+            <div class="section-title-group">
+                <span class="section-badge">PHASE 02 ML SUITE</span>
+                <h2>3. Machine Learning Multi-Model Benchmark Suite</h2>
+                <p>Evaluated 5 regression architectures to achieve high-precision 4-hour forward smog forecasting.</p>
+            </div>
+
+            <!-- ML Model Benchmark Table -->
+            <div class="glass-card benchmark-card tilt-card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-microchip icon-cyan"></i> Multi-Model Benchmark Evaluation Matrix</h3>
+                    <span class="model-badge"><i class="fa-solid fa-trophy"></i> Top Model: Extra Trees Regressor</span>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="benchmark-table">
+                        <thead>
+                            <tr>
+                                <th>Model Architecture</th>
+                                <th>R&sup2; Score (Accuracy)</th>
+                                <th>MAE (&mu;g/m&sup3;)</th>
+                                <th>RMSE (&mu;g/m&sup3;)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td><strong>Extra Trees Regressor (Optimized)</strong></td>
+                                <td><strong class="highlight-cyan">0.9439 (94.4%)</strong></td>
+                                <td><strong class="highlight-emerald">8.65</strong></td>
+                                <td>13.91</td>
+                                <td><span class="badge-status status-winner">SELECTED PRODUCTION MODEL</span></td>
+                            </tr>
+                            <tr>
+                                <td>Random Forest Regressor</td>
+                                <td>0.9381 (93.8%)</td>
+                                <td>9.12</td>
+                                <td>14.62</td>
+                                <td><span class="badge-status">BENCHMARKED</span></td>
+                            </tr>
+                            <tr>
+                                <td>Gradient Boosting Regressor</td>
+                                <td>0.9240 (92.4%)</td>
+                                <td>10.34</td>
+                                <td>16.05</td>
+                                <td><span class="badge-status">BENCHMARKED</span></td>
+                            </tr>
+                            <tr>
+                                <td>HistGradientBoosting Regressor</td>
+                                <td>0.9195 (91.9%)</td>
+                                <td>10.82</td>
+                                <td>16.51</td>
+                                <td><span class="badge-status">BENCHMARKED</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ridge Regression (Baseline)</td>
+                                <td>0.7410 (74.1%)</td>
+                                <td>19.45</td>
+                                <td>28.12</td>
+                                <td><span class="badge-status status-baseline">BASELINE</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="ml-notes">
+                    <p><strong>Accuracy Drivers (R&sup2; = 94.4%):</strong> Engineered 11 temporal lag & rolling statistics (`pm25_lag_1` to `4`, 3h/6h/12h rolling averages, temperature rate-of-change) to capture atmospheric smog momentum.</p>
+                </div>
+            </div>
+
+            <!-- ML Forecast Curve Chart -->
+            <div class="glass-card chart-card tilt-card">
+                <div class="chart-header">
+                    <div class="chart-title">
+                        <i class="fa-solid fa-chart-line icon-cyan"></i> 4-Hour Predictive Smog Trajectory Curve
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="forecastChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 2 Architecture: Physical Canopy Interception Physics Engine -->
+        <section class="dashboard-section reveal-3d">
+            <div class="section-title-group">
+                <span class="section-badge">PHASE 02 PHYSICAL PHYSICS</span>
+                <h2>4. Green Shield Ecological Canopy Physics Engine</h2>
+                <p>Dry deposition interception physics coupled with native NCR vegetative boundary barriers.</p>
+            </div>
+
+            <div class="sim-grid">
+                
+                <!-- Math & Physics Details -->
+                <div class="glass-card sim-card tilt-card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-calculator icon-emerald"></i> Interception Equation & Species Parameters</h3>
+                    </div>
+                    <div class="sim-controls">
+                        <div class="formula-box" style="font-family:var(--font-tech); font-size:18px; color:var(--emerald-green); text-align:center;">
+                            &eta; = 1 &minus; e<sup>&minus;k &middot; W</sup>
+                            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.4rem;">
+                                Where &eta; = Canopy Interception Efficiency, k = Extinction Coefficient (m&sup1;), W = Barrier Depth Width (m).
+                            </p>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="benchmark-table compact-table">
+                                <thead>
+                                    <tr>
+                                        <th>Native Tree Species</th>
+                                        <th>Canopy Type</th>
+                                        <th>Extinction Coefficient ($k$)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Neem (*Azadirachta indica*)</strong></td>
+                                        <td>Evergreen</td>
+                                        <td><span class="highlight-cyan">k = 0.080 m&sup1;</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Pilkan (*Ficus infectoria*)</strong></td>
+                                        <td>Evergreen</td>
+                                        <td><span class="highlight-emerald">k = 0.070 m&sup1;</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Amaltas (*Cassia fistula*)</strong></td>
+                                        <td>Deciduous</td>
+                                        <td><span class="highlight-amber">k = 0.040 m&sup1;</span></td>
+                                    </tr>
+                                    <tr class="highlight-row">
+                                        <td><strong>Mixed Native NCR Shield</strong></td>
+                                        <td>Hybrid Barrier</td>
+                                        <td><strong class="highlight-purple">k = 0.075 m&sup1;</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photorealistic Native Tree Video Stream -->
+                <div class="glass-card sim-card tilt-card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-tree icon-cyan"></i> Vegetative Boundary Filtration Simulation</h3>
+                    </div>
+                    
+                    <div class="tree-video-box">
+                        <video autoplay loop muted playsinline poster="assets/green_shield_trees.mp4">
+                            <source src="assets/green_shield_trees.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-sub-badge"><i class="fa-solid fa-leaf"></i> Photorealistic Native Tree Filtration Stream</div>
+                    </div>
+
+                    <div class="sim-output-box">
+                        <div class="sim-metric">
+                            <span class="sm-label">20m Neem Barrier Filtration Rate</span>
+                            <span class="sm-val efficiency-val">&eta; = 79.8%</span>
+                        </div>
+                        <div class="sim-metric">
+                            <span class="sm-label">Total Native Canopy Area</span>
+                            <span class="sm-val filtered-val">4,000 m&sup2;</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA Banner to Open Interactive App Console -->
+        <section class="console-cta-banner glass-card tilt-card reveal-3d">
+            <div class="cta-text">
+                <h2>Launch Interactive Application Console</h2>
+                <p>Interact with individual feature sliders, GRAP traffic scenario simulators, and automated SOP dispatchers using the Sidebar Navigation menu.</p>
+            </div>
+            <a href="app_console.html" class="btn-primary btn-large">
+                <i class="fa-solid fa-laptop-code"></i> Launch Interactive App Console &rarr;
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer glass-card tilt-card reveal-3d">
+            <p>&copy; 2026 AeroCampus-AI Project &bull; Author: Sahil Agarwal &bull; JIIT Noida Sector 62 &bull; 1M1B Internship Submission</p>
+        </footer>
+
+    </div>
+
+    <!-- Modals -->
+    <div class="spatial-map-modal" id="spatial-map-modal">
+        <div class="glass-card modal-content">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <h3><i class="fa-solid fa-map-location-dot icon-cyan"></i> Campus Spatial Alignment Radar & Map</h3>
+                </div>
+                <button class="modal-close-btn" onclick="closeSpatialMapModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-sidebar">
+                    <div class="nav-section-label">SELECT POLLUTION CORRIDOR</div>
+                    <div class="modal-nav-tabs">
+                        <button class="modal-tab-btn active" id="tab-modal-nh24" onclick="switchMapCorridor('nh24')">
+                            <span><i class="fa-solid fa-road icon-cyan"></i> NH-24 Corridor (45&deg; NE)</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                        <button class="modal-tab-btn" id="tab-modal-industrial" onclick="switchMapCorridor('industrial')">
+                            <span><i class="fa-solid fa-industry icon-purple"></i> Sector 63 Industrial (135&deg; SE)</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                        <button class="modal-tab-btn" id="tab-modal-inversion" onclick="switchMapCorridor('inversion')">
+                            <span><i class="fa-solid fa-layer-group icon-amber"></i> Boundary Layer Inversion</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="modal-wind-arrow-box">
+                        <i class="fa-solid fa-arrow-up modal-arrow-icon" id="modal-wind-arrow-icon"></i>
+                        <div class="modal-arrow-text">
+                            <span>LIVE ATMOSPHERIC WIND VECTOR</span>
+                            <strong id="modal-wind-arrow-val">130&deg; (SE - Southeast)</strong>
+                        </div>
+                    </div>
+                    <div class="modal-info-panel">
+                        <h4 id="modal-corridor-name"><i class="fa-solid fa-compass icon-cyan"></i> NH-24 Highway Corridor</h4>
+                        <p id="modal-corridor-desc">Heavy vehicular expressway situated 200m North of Jaypee Road. Major source of road dust and diesel particulate matter.</p>
+                        <div class="info-stat-row"><span>Target Bearing:</span><strong id="modal-bearing-val">45&deg; (Northeast)</strong></div>
+                        <div class="info-stat-row"><span>Distance to Campus:</span><strong id="modal-distance-val">200 meters</strong></div>
+                        <div class="info-stat-row"><span>Live Alignment Vector:</span><strong id="modal-alignment-val" class="highlight-cyan">0%</strong></div>
+                    </div>
+                </div>
+                <div class="map-viewport-container"><div id="map-container"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts with 3D Tilt Cards Cache Buster -->
+    <script src="app.js?v=home_3d_tilt_v19"></script>
+</body>
+</html>

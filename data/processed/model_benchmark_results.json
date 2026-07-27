@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-07-26T22:29:57.209251",
+  "dataset_size": 8776,
+  "train_samples": 7020,
+  "test_samples": 1756,
+  "target": "target_pm25_4h (4-Hour Forecast)",
+  "best_model": "Extra Trees Regressor (Optimized)",
+  "best_r2_score": 0.9179,
+  "feature_importances": {
+    "pm25": 0.2564,
+    "pm25_lag_1": 0.1031,
+    "pm25_lag_2": 0.032,
+    "pm25_lag_3": 0.0273,
+    "pm25_lag_4": 0.0212,
+    "pm25_rolling_3h": 0.1225,
+    "pm25_rolling_6h": 0.0644,
+    "pm25_rolling_12h": 0.1305,
+    "temperature": 0.0144,
+    "relative_humidity": 0.016,
+    "temp_diff_3h": 0.0323,
+    "humidity_diff_3h": 0.0178,
+    "wind_speed": 0.0176,
+    "wind_direction": 0.0091,
+    "wind_alignment_nh24": 0.007,
+    "wind_alignment_industrial": 0.0083,
+    "stagnation_index": 0.0082,
+    "traffic_proxy": 0.0109,
+    "hour": 0.0714,
+    "day_of_week": 0.0071,
+    "is_weekend": 0.0043,
+    "is_rush_hour": 0.0182,
+    "grap_active": 0.0
+  },
+  "model_benchmarks": {
+    "Extra Trees Regressor (Optimized)": {
+      "MAE": 11.8346,
+      "RMSE": 17.0699,
+      "R2_Score": 0.9179,
+      "Status": "Evaluated"
+    },
+    "Random Forest Regressor (Optimized)": {
+      "MAE": 12.1613,
+      "RMSE": 17.4673,
+      "R2_Score": 0.914,
+      "Status": "Evaluated"
+    },
+    "Gradient Boosting Regressor": {
+      "MAE": 11.9472,
+      "RMSE": 17.1689,
+      "R2_Score": 0.9169,
+      "Status": "Evaluated"
+    },
+    "HistGradientBoosting Regressor": {
+      "MAE": 12.2885,
+      "RMSE": 17.3141,
+      "R2_Score": 0.9155,
+      "Status": "Evaluated"
+    },
+    "Ridge Regressor": {
+      "MAE": 18.3789,
+      "RMSE": 25.7933,
+      "R2_Score": 0.8125,
+      "Status": "Evaluated"
+    }
+  }
+}

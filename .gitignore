@@ -1,11 +1,18 @@
-# Byte-compiled / optimized / DLL files
+# Python bytecode & cache
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 *.so
 
-# Environments & IDEs
+# Binary Model Files (Large ML Pickles > 50MB)
+*.pkl
+models/*.pkl
+
+# Large HTML Exports outside app/
+data_cleaning_and_preprocessing.html
+
+# Environments & IDE settings
 .env
 .venv
 env/

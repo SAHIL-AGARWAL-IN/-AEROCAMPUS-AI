@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "routes": [
+    { "source": "/", "dest": "/app/index.html" },
+    { "source": "/console", "dest": "/app/app_console.html" },
+    { "source": "/(.*)", "dest": "/$1" }
+  ]
+}
